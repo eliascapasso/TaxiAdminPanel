@@ -1,0 +1,76 @@
+<button (click)="open(content)" class="btn btn-success">{{ buttonName }}</button>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{ titleModal }}</h4>
+        <button (click)="d('Cross click')" aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <!-- MODAL BODY -->
+    <div class="modal-body">
+        <form role="form" (ngSubmit)="saveCar()">
+            <!-- BRAND -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-hand-o-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Brand" type="text" name="brand" [(ngModel)]="car.brand" />
+            </div>
+
+            <!-- MODEL -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-hand-o-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Model" type="text" name="model" [(ngModel)]="car.model" />
+            </div>
+
+            <!-- MODEL YEAR -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-hand-o-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Model year" type="text" name="modelYear" [(ngModel)]="car.modelYear" />
+            </div>
+
+            <!-- SEATS -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-hand-o-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Seats" type="number" name="seats" [(ngModel)]="car.seats" />
+            </div>
+
+            <!-- TRUNK CAPACITY -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-hand-o-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Trunk capacity" type="text" name="trunkCapacity" [(ngModel)]="car.trunkCapacity" />
+            </div>
+
+            <!-- ENROLLMENT -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-hand-o-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Enrollment" type="text" name="enrollment" [(ngModel)]="car.enrollment" />
+            </div>
+
+            <!-- ADDITIONAL SERVICES -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-hand-o-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Additional services" type="text" name="additionalServices" [(ngModel)]="car.additionalServices" />
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

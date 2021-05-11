@@ -1,0 +1,84 @@
+<button (click)="open(content)" class="btn btn-success">{{ buttonName }}</button>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{ titleModal }}</h4>
+        <button (click)="d('Cross click')" aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <!-- MODAL BODY -->
+    <div class="modal-body">
+        <form role="form" (ngSubmit)="savePassenger()">
+            <!-- FIRST NAME -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                </div>
+                <input class="form-control" placeholder="First name" type="text" name="firstname" [(ngModel)]="passenger.firstname" />
+            </div>
+
+            <!-- LAST NAME -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                </div>
+                <input class="form-control" placeholder="Last name" type="text" name="lastname" [(ngModel)]="passenger.lastname" />
+            </div>
+
+            <!-- EMAIL -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"></i></span>
+                </div>
+                <input class="form-control" placeholder="Email" type="text" name="email" [(ngModel)]="passenger.email" />
+            </div>
+
+            <!-- PHONE NUMBER -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"></i></span>
+                </div>
+                <input class="form-control" placeholder="Phone number" type="text" name="phoneNumber" [(ngModel)]="passenger.phoneNumber" />
+            </div>
+
+            <!-- LINE NUMBER -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
+                </div>
+                <input class="form-control" placeholder="Line number" type="text" name="lineNumber" [(ngModel)]="passenger.lineNumber" />
+            </div>
+
+            <!-- ADDRESS -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+                </div>
+                <input class="form-control" placeholder="Address" type="text" name="address" [(ngModel)]="passenger.address" />
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+                </div>
+                <input class="form-control" placeholder="Password" type="password" />
+            </div>
+
+            <!-- USERNAME -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                </div>
+                <input class="form-control" placeholder="Username" type="text" name="username" [(ngModel)]="passenger.username" />
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,28 @@
+<div [@routerTransition]>
+    <h2 class="text-muted">Dashboard</h2>
+    <hr />
+    <div class="row">
+        <a class="col-xl-6 col-lg-12" [routerLinkActive]="['router-link-active']" [routerLink]="['/dashboard']">
+            <app-stat [bgClass]="'primary'" [count]="56" [icon]="'fa-map'" [label]="'Trips'"> </app-stat>
+        </a>
+        <a class="col-xl-6 col-lg-12" [routerLinkActive]="['router-link-active']" [routerLink]="['/passengers']">
+            <app-stat [bgClass]="'warning'" [count]="passengersCount" [icon]="'fa-users'" [label]="'Passengers'"></app-stat>
+        </a>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <a class="col-xl-6 col-lg-12" [routerLinkActive]="['router-link-active']" [routerLink]="['/drivers']">
+            <app-stat
+                [bgClass]="'success'"
+                [count]="driversCount"
+                [icon]="'fa-male'"
+                [label]="'Drivers'"
+            ></app-stat>
+        </a>
+        <a class="col-xl-6 col-lg-12" [routerLinkActive]="['router-link-active']" [routerLink]="['/cars']">
+            <app-stat [bgClass]="'danger'" [count]="carsCount" [icon]="'fa-car'" [label]="'Cars'"></app-stat>
+        </a>
+    </div>
+</div>

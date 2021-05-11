@@ -1,0 +1,25 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Map'" [icon]="'fa-map'"></app-page-header>
+
+    <div class="nav-map-driver">
+        <input
+            id="typeahead-focus"
+            type="text"
+            placeholder="Search driver"
+            class="form-control"
+            [(ngModel)]="username"
+            [ngbTypeahead]="search"
+            (focus)="focus$.next($any($event).target.value)"
+            (click)="click$.next($any($event).target.value)"
+            (ngModelChange)="changeDriver()"
+            #instance="ngbTypeahead"
+        />
+    </div>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3">
+                <iframe #iframe width="100%" height="500px" frameborder="0" style="border: 0;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<button (click)="open(content)" class="btn btn-success">{{ buttonName }}</button>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{ titleModal }}</h4>
+        <button (click)="d('Cross click')" aria-label="Close" class="close" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="alert alert-warning" *ngIf="errorMessage!=''">
+        <strong>Warning!</strong> {{ errorMessage }}
+    </div>
+
+    <!-- MODAL BODY -->
+    <div class="modal-body">
+        <form role="form" (ngSubmit)="saveDriver()">
+            <!-- FIRST NAME -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                </div>
+                <input class="form-control" placeholder="First name" type="text" name="firstname" [(ngModel)]="driver.firstname" />
+            </div>
+
+            <!-- LAST NAME -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+                </div>
+                <input class="form-control" placeholder="Last name" type="text" name="lastname" [(ngModel)]="driver.lastname" />
+            </div>
+
+            <!-- EMAIL -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"></i></span>
+                </div>
+                <input class="form-control" placeholder="Email" type="text" name="email" [(ngModel)]="driver.email" />
+            </div>
+
+            <!-- PHONE NUMBER -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"></i></span>
+                </div>
+                <input class="form-control" placeholder="Phone number" type="text" name="phoneNumber" [(ngModel)]="driver.phoneNumber" />
+            </div>
+
+            <!-- LINE NUMBER -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
+                </div>
+                <input class="form-control" placeholder="Line number" type="text" name="lineNumber" [(ngModel)]="driver.lineNumber" />
+            </div>
+
+            <!-- ADDRESS -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
+                </div>
+                <input class="form-control" placeholder="Address" type="text" name="address" [(ngModel)]="driver.address" />
+            </div>
+
+            <!-- SOCIAL ID -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-id-card-o"></i></span>
+                </div>
+                <input class="form-control" placeholder="Social ID" type="text" name="socialId" [(ngModel)]="driver.socialId" />
+            </div>
+
+            <!-- CAR -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend" style="float: left;">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"></i></span>
+                    <div>
+                        <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+                </div>
+                <input class="form-control" placeholder="Password" type="password" name="pass" [(ngModel)]="driver.password" />
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="c('Close click')" class="btn btn-secondary" type="button">Close</button>
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,46 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Cars'" [icon]="'fa-car'"></app-page-header>
+
+    <div class="nav-car">
+        <input type="search" placeholder=" Search car" [(ngModel)]="search" (change)="changeFilterHandler()">
+        <app-car-modal [edit]="false"></app-car-modal>
+    </div>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-body table-responsive" *ngIf="cars.length > 0; else nocars">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>Model</th>
+                                <th>Model Year</th>
+                                <th>Seats</th>
+                                <th>Trunk Capacity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let car of cars">
+                                <td>{{car.brand}}</td>
+                                <td>{{car.model}}</td>
+                                <td>{{car.modelYear}}</td>
+                                <td>{{car.seats}}</td>
+                                <td>{{car.trunkCapacity}}</td>
+
+                                <td>
+                                    <app-car-modal [edit]="true" [car]="car"></app-car-modal>
+                                    &nbsp;
+                                    <button (click)="deleteCar($event, car)" class="btn btn-danger" style="padding-left: 10px;">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #nocars>
+    <p>There are no cars yet.</p>
+</ng-template>
