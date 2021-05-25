@@ -25,19 +25,23 @@ export class DriversComponent implements OnInit {
 
     getDrivers() {
         this.drivers = [];
-        this.driverService.getDrivers().subscribe((drivers) => {
+        setTimeout(() => {
+            let drivers = this.driverService.getDrivers();
             for (let d of drivers) {
                 let driver: DriverView = this.mapper.mapDriverView(d);
-                this.drivers.push(driver);
-                this.originalDrivers.push(driver);
+                if (driver.enabled) {
+                    this.drivers.push(driver);
+                    this.originalDrivers.push(driver);
+                }
             }
-        });
+        }, 2000);
     }
 
     deleteDriver(driver: DriverView) {
         if (confirm('Are you sure to delete ' + driver.lastname + ' ' + driver.firstname + '?')) {
             try {
                 this.driverService.deleteDriver(driver.userId);
+                this.getDrivers();
             } catch (error) {
                 console.info(error);
                 console.error(error.message);

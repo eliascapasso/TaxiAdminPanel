@@ -54,9 +54,7 @@ export class MapDriverComponent implements OnInit {
     }
 
     getDrivers() {
-        this.driverService.getDrivers().subscribe((drivers) => {
-            this.drivers = drivers;
-        });
+        this.drivers = this.driverService.getDrivers();
     }
 
     changeDriver() {

@@ -23,16 +23,16 @@ export class DashboardComponent implements OnInit {
                 private carService: CarService) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.showMenu = '';
         this.passengerservice.getPassengers().subscribe(passengers =>{
             this.passengersCount = passengers.length;
         });
 
-        this.driverService.getDrivers().subscribe(drivers =>{
-            this.driversCount = drivers.length;
-        });
-
+        setTimeout(() => {
+            this.driversCount = this.driverService.getCount();
+        }, 2000);
+        
         this.carService.getCars().subscribe(cars =>{
             this.carsCount = cars.length;
         });

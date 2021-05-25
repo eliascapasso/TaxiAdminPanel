@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../../domain/user.model';
-import { Driver } from '../../domain/driver.model';
 import { DriverService } from '../../services/driver.service';
-import { Role } from '../../../app/domain/role';
 import { UserService } from '../../../app/services/user.service';
+import { DriverView } from '../../../app/domain/driverView.model';
 
 @Component({
     selector: 'app-driver-modal',
@@ -13,12 +12,12 @@ import { UserService } from '../../../app/services/user.service';
 })
 export class DriverModalComponent {
     closeResult: string;
-    @Input() driver = {} as Driver;
+    @Input() driver = {} as DriverView;
     @Input() edit: boolean;
     user = {} as User;
     buttonName: string;
     titleModal: string = '';
-    editingDriver: Driver;
+    editingDriver = {} as DriverView;
     errorMessage: string = "";
 
     constructor(
@@ -31,15 +30,7 @@ export class DriverModalComponent {
         if (this.edit) {
             this.titleModal = 'Edit driver';
             this.buttonName = 'Edit';
-            this.userService.getUsers().subscribe(users=>{
-                for(let u of users){
-                    if(u.id == this.driver.userId){
-                        this.user = u;
-                        this.user.id = this.driver.userId;
-                        break;
-                    }
-                }
-            });
+            this.user = this.userService.getUser(this.driver.userId);
         } else {
             this.titleModal = 'New driver';
             this.buttonName = '+ Add driver';
@@ -57,10 +48,6 @@ export class DriverModalComponent {
     async addDriver() {
         this.errorMessage = "";
 
-        this.user.role = [];
-        this.user.role.push(Role.DRIVER);
-        this.user.enabled = true;
-
         try{
             this.driverService.addDriver(this.driver, this.user);
             
@@ -77,18 +64,13 @@ export class DriverModalComponent {
     }
 
     editDriver() {
-        console.info(this.driver);
         this.editingDriver = this.driver;
-        
-        this.user.role = [];
-        this.user.role.push(Role.DRIVER);
-        this.user.enabled = true;
 
         try{
+            console.log(this.driver, this.user);
             this.driverService.editDriver(this.driver, this.user);
 
             console.assert('Successfully edited driver!');
-            console.info(this.driver);
 
             this.driver = {};
             this.modalService.dismissAll('Edit driver');
