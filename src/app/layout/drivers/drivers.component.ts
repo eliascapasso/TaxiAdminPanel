@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DriverService } from '../../../app/services/driver.service';
-import { Driver } from '../../../app/domain/driver.model';
 import { routerTransition } from '../../router.animations';
+import { DriverView } from '../../../app/domain/driverView.model';
+import { Mapper } from '../../../app/shared/util/mapper';
 
 @Component({
     selector: 'app-drivers',
@@ -12,29 +13,35 @@ import { routerTransition } from '../../router.animations';
 export class DriversComponent implements OnInit {
     buttonNameAdd = '+ Add driver';
     buttonNameEdit = 'Edit';
-    public drivers = {} as Driver[];
-    public originalDrivers = {} as Driver[];
+    public drivers = [] as DriverView[];
+    public originalDrivers = [] as DriverView[];
     search: string = '';
 
-    constructor(private driverService: DriverService) {}
+    constructor(private driverService: DriverService, private mapper: Mapper) {}
 
     ngOnInit() {
         this.getDrivers();
     }
 
     getDrivers() {
+        this.drivers = [];
         this.driverService.getDrivers().subscribe((drivers) => {
-            console.log(drivers);
-            this.drivers = drivers;
-            this.originalDrivers = drivers;
+            for (let d of drivers) {
+                let driver: DriverView = this.mapper.mapDriverView(d);
+                this.drivers.push(driver);
+                this.originalDrivers.push(driver);
+            }
         });
     }
 
-    deleteDriver(event, driver: Driver) {
-        console.info(event);
-        console.info(driver);
-        if (confirm('Are you sure to delete ' + driver.email + '?')) {
-            this.driverService.deleteDriver(driver);
+    deleteDriver(driver: DriverView) {
+        if (confirm('Are you sure to delete ' + driver.lastname + ' ' + driver.firstname + '?')) {
+            try {
+                this.driverService.deleteDriver(driver.userId);
+            } catch (error) {
+                console.info(error);
+                console.error(error.message);
+            }
         }
     }
 

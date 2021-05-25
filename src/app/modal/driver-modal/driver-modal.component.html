@@ -20,7 +20,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                 </div>
-                <input class="form-control" placeholder="First name" type="text" name="firstname" [(ngModel)]="driver.firstname" />
+                <input class="form-control" placeholder="First name" type="text" name="firstname" [(ngModel)]="user.firstname" />
             </div>
 
             <!-- LAST NAME -->
@@ -28,15 +28,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
                 </div>
-                <input class="form-control" placeholder="Last name" type="text" name="lastname" [(ngModel)]="driver.lastname" />
-            </div>
-
-            <!-- EMAIL -->
-            <div class="form-group input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"></i></span>
-                </div>
-                <input class="form-control" placeholder="Email" type="text" name="email" [(ngModel)]="driver.email" />
+                <input class="form-control" placeholder="Last name" type="text" name="lastname" [(ngModel)]="user.lastname" />
             </div>
 
             <!-- PHONE NUMBER -->
@@ -44,7 +36,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-mobile"></i></span>
                 </div>
-                <input class="form-control" placeholder="Phone number" type="text" name="phoneNumber" [(ngModel)]="driver.phoneNumber" />
+                <input class="form-control" placeholder="Phone number" type="text" name="phoneNumber" [(ngModel)]="user.phoneNumber" />
             </div>
 
             <!-- LINE NUMBER -->
@@ -52,7 +44,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
                 </div>
-                <input class="form-control" placeholder="Line number" type="text" name="lineNumber" [(ngModel)]="driver.lineNumber" />
+                <input class="form-control" placeholder="Line number" type="text" name="lineNumber" [(ngModel)]="user.lineNumber" />
             </div>
 
             <!-- ADDRESS -->
@@ -60,7 +52,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"></i></span>
                 </div>
-                <input class="form-control" placeholder="Address" type="text" name="address" [(ngModel)]="driver.address" />
+                <input class="form-control" placeholder="Address" type="text" name="address" [(ngModel)]="user.address" />
             </div>
 
             <!-- SOCIAL ID -->
@@ -68,7 +60,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-id-card-o"></i></span>
                 </div>
-                <input class="form-control" placeholder="Social ID" type="text" name="socialId" [(ngModel)]="driver.socialId" />
+                <input class="form-control" placeholder="Social ID" type="number" name="socialId" [(ngModel)]="driver.socialId" />
             </div>
 
             <!-- CAR -->
@@ -87,12 +79,20 @@
                 </div>
             </div>
 
-            <!-- PASSWORD -->
+            <!-- EMAIL -->
             <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-o"></i></span>
+                </div>
+                <input class="form-control" placeholder="Email" type="text" name="email" [(ngModel)]="user.email" [disabled]="edit" />
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-group input-group" *ngIf="!edit">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password" name="pass" [(ngModel)]="driver.password" />
+                <input class="form-control" placeholder="Password" type="password" name="pass" [(ngModel)]="user.password" />
             </div>
 
             <div class="modal-footer">

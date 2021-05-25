@@ -1,13 +1,13 @@
-export class User {
-    id?: string;
+export class DriverView {
+    driverId?: string;
+    userId?:string;
     email?: string;
-    password?: string;
-
     phoneNumber?: string;
     lineNumber?: string;
     firstname?: string;
     lastname?: string;
     address?: string;
-    role?: string[];
+    socialId?: number;
+    geoPosition?: any;
     enabled?: boolean;
 }

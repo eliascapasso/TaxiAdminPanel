@@ -1,8 +1,8 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'Drivers'" [icon]="'fa-male'"></app-page-header>
-    
+
     <div class="nav-driver">
-        <input type="search" placeholder=" Search driver" [(ngModel)]="search" (change)="changeFilterHandler()">
+        <input type="search" placeholder=" Search driver" [(ngModel)]="search" (change)="changeFilterHandler()" />
         <app-driver-modal [edit]="false"></app-driver-modal>
     </div>
     <div class="row">
@@ -30,7 +30,13 @@
                                 <td>
                                     <app-driver-modal [edit]="true" [driver]="driver"></app-driver-modal>
                                     &nbsp;
-                                    <button (click)="deleteDriver($event, driver)" class="btn btn-danger" style="padding-left: 10px;">Delete</button>
+                                    <button
+                                        (click)="deleteDriver(driver)"
+                                        class="btn btn-danger"
+                                        style="padding-left: 10px;"
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

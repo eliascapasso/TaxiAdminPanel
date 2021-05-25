@@ -14,13 +14,12 @@ import { Driver } from '../../domain/driver.model';
     animations: [routerTransition()]
 })
 export class MapDriverComponent implements OnInit {
-
     @ViewChild('instance', { static: true }) instance: NgbTypeahead;
     focus$ = new Subject<string>();
     click$ = new Subject<string>();
 
     private drivers = [];
-    public username: string;
+    public name: string;
     private driver: Driver = {};
 
     @ViewChild('iframe') iframe: ElementRef;
@@ -34,11 +33,11 @@ export class MapDriverComponent implements OnInit {
             map((term) =>
                 (term === null
                     ? this.drivers.map(function (item: Driver) {
-                          return item.email;
+                          return item.name.toString();
                       })
                     : this.drivers
                           .map(function (item: Driver) {
-                              return item.email;
+                              return item.name.toString();
                           })
                           .filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
                 ).slice(0, 10)
@@ -62,7 +61,7 @@ export class MapDriverComponent implements OnInit {
 
     changeDriver() {
         for (let i = 0; i < this.drivers.length; i++) {
-            if (this.drivers[i].username === this.username) {
+            if (this.drivers[i].name === this.name) {
                 console.log(this.drivers[i]);
                 this.driver = this.drivers[i];
 
@@ -73,15 +72,15 @@ export class MapDriverComponent implements OnInit {
     }
 
     getGeolocation() {
-        if(this.driver != {}){
+        if (this.driver != {}) {
             this.iframe.nativeElement.src =
-            'https://maps.google.com/maps?q=' +
-            this.driver.geoPosition.latitude +
-            ', ' +
-            this.driver.geoPosition.longitude +
-            '&z=15&output=embed';
+                'https://maps.google.com/maps?q=' +
+                this.driver.geoPosition.latitude +
+                ', ' +
+                this.driver.geoPosition.longitude +
+                '&z=15&output=embed';
         }
-        
+
         // let watch = this.geolocation.watchPosition();
         // watch.subscribe((data: any) => {
         //     // data can be a set of coordinates, or an error (if an error occurred).

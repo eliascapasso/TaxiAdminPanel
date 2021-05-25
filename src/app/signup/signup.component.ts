@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
         this.errorMessage = "";
         this.success = false;
 
-        if(this.user.pass == this.pass2){
+        if(this.user.password == this.pass2){
             try{
                 const user = await this.authService.onRegistrer(this.user);
                 if(user){

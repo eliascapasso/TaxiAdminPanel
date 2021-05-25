@@ -7,7 +7,7 @@
             type="text"
             placeholder="Search driver"
             class="form-control"
-            [(ngModel)]="username"
+            [(ngModel)]="name"
             [ngbTypeahead]="search"
             (focus)="focus$.next($any($event).target.value)"
             (click)="click$.next($any($event).target.value)"

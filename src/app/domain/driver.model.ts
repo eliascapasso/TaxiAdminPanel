@@ -1,15 +1,7 @@
 export class Driver {
     id?:any;
+    name?:string;
     socialId?: number;
-    email?: string;
-    phoneNumber?: string;
-    lineNumber?: string;
-    firstname?: string;
-    lastname?: string;
-    age?: number;
-    password?: string;
-    document?: number;
-    dob?: string;
-    address?: string;
-    geoPosition?: any; 
+    geoPosition?: any;
+    userId?: string;
 }
