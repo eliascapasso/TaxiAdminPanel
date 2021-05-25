@@ -2,7 +2,7 @@
     <app-page-header [heading]="'Map'" [icon]="'fa-map'"></app-page-header>
 
     <div class="nav-map-driver">
-        <input
+        <!-- <input
             id="typeahead-focus"
             type="text"
             placeholder="Search driver"
@@ -13,6 +13,13 @@
             (click)="click$.next($any($event).target.value)"
             (ngModelChange)="changeDriver()"
             #instance="ngbTypeahead"
+        /> -->
+        <input
+            type="text"
+            placeholder="Search driver"
+            class="form-control"
+            [(ngModel)]="name"
+            (ngModelChange)="changeDriver()"
         />
     </div>
     <div class="row">

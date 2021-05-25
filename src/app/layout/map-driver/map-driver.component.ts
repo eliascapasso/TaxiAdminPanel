@@ -32,12 +32,13 @@ export class MapDriverComponent implements OnInit {
         return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
             map((term) =>
                 (term === null
-                    ? this.drivers.map(function (item: Driver) {
-                          return item.name.toString();
+                    ? this.drivers.map(function (item: any) {
+                        console.log(item);
+                          return item.name;
                       })
                     : this.drivers
-                          .map(function (item: Driver) {
-                              return item.name.toString();
+                          .map(function (item: any) {
+                              return item.name;
                           })
                           .filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
                 ).slice(0, 10)
@@ -54,7 +55,10 @@ export class MapDriverComponent implements OnInit {
     }
 
     getDrivers() {
-        this.drivers = this.driverService.getDrivers();
+        setTimeout(() => {
+            this.drivers = this.driverService.getDrivers();
+            console.log(this.drivers);
+        }, 2000);
     }
 
     changeDriver() {
@@ -70,13 +74,20 @@ export class MapDriverComponent implements OnInit {
     }
 
     getGeolocation() {
+        console.log(this.iframe.nativeElement.src =
+            'https://maps.google.com/maps?q=' +
+            this.driver.geoPosition.latitude +
+            ', ' +
+            this.driver.geoPosition.longitude +
+            '&z=15&output=embed');
+
         if (this.driver != {}) {
             this.iframe.nativeElement.src =
-                'https://maps.google.com/maps?q=' +
+                'https://maps.google.com/maps/embed/v1/place?key=AIzaSyDiKXibixqMr62k0pkaeYpEnNWZWqv1_9Q&q=' +
                 this.driver.geoPosition.latitude +
                 ', ' +
                 this.driver.geoPosition.longitude +
-                '&z=15&output=embed';
+                '&zoom=15';
         }
 
         // let watch = this.geolocation.watchPosition();
