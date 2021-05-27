@@ -18,6 +18,7 @@ export class MapDriverComponent implements OnInit {
     focus$ = new Subject<string>();
     click$ = new Subject<string>();
 
+    public errorMessage: string = '';
     private drivers = [];
     public name: string;
     private driver: Driver = {};
@@ -33,15 +34,14 @@ export class MapDriverComponent implements OnInit {
             map((term) =>
                 (term === null
                     ? this.drivers.map(function (item: any) {
-                        console.log(item);
                           return item.name;
                       })
-                    : this.drivers
-                          .map(function (item: any) {
-                              return item.name;
-                          })
-                          .filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
-                ).slice(0, 10)
+                    : this.drivers.map(function (item: any) {
+                          return item.name;
+                      })
+                )
+                    //   .filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
+                    .slice(0, 10)
             )
         );
     };
@@ -50,21 +50,19 @@ export class MapDriverComponent implements OnInit {
         this.getDrivers();
     }
 
-    ngOnInit(): void {
-        //this.getGeolocation();
-    }
+    ngOnInit() {}
 
     getDrivers() {
         setTimeout(() => {
             this.drivers = this.driverService.getDrivers();
-            console.log(this.drivers);
         }, 2000);
     }
 
     changeDriver() {
+        console.info(this.drivers);
+        this.driver = {};
         for (let i = 0; i < this.drivers.length; i++) {
             if (this.drivers[i].name === this.name) {
-                console.log(this.drivers[i]);
                 this.driver = this.drivers[i];
 
                 this.getGeolocation();
@@ -74,29 +72,27 @@ export class MapDriverComponent implements OnInit {
     }
 
     getGeolocation() {
-        console.log(this.iframe.nativeElement.src =
-            'https://maps.google.com/maps?q=' +
-            this.driver.geoPosition.latitude +
-            ', ' +
-            this.driver.geoPosition.longitude +
-            '&z=15&output=embed');
-
-        if (this.driver != {}) {
-            this.iframe.nativeElement.src =
-                'https://maps.google.com/maps/embed/v1/place?key=AIzaSyDiKXibixqMr62k0pkaeYpEnNWZWqv1_9Q&q=' +
-                this.driver.geoPosition.latitude +
-                ', ' +
-                this.driver.geoPosition.longitude +
-                '&zoom=15';
+        if (this.driver.geoPosition != null && this.driver.geoPosition != undefined) {
+            this.errorMessage = '';
+            console.log(this.iframe);
+            if (this.driver != {}) {
+                setTimeout(() => {
+                    if (this.iframe != undefined) {
+                        this.iframe.nativeElement.src =
+                            'https://maps.google.com/maps/embed/v1/place?key=AIzaSyDiKXibixqMr62k0pkaeYpEnNWZWqv1_9Q&q=' +
+                            this.driver.geoPosition.latitude +
+                            ', ' +
+                            this.driver.geoPosition.longitude +
+                            '&zoom=15';
+                    } else {
+                        this.errorMessage = 'Try again later';
+                        console.warn('ERROR: iframe undefined');
+                    }
+                }, 2000);
+            }
+        } else {
+            this.driver = {};
+            this.errorMessage = 'Driver location not found';
         }
-
-        // let watch = this.geolocation.watchPosition();
-        // watch.subscribe((data: any) => {
-        //     // data can be a set of coordinates, or an error (if an error occurred).
-
-        //     this.lat = data.coords.latitude;
-        //     this.lon = data.coords.longitude;
-
-        // });
     }
 }
